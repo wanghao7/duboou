@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.wanghao.dao.ArticleMapper">
+  	<select id="getList" resultType="com.wanghao.entity.Article" >
+  		SELECT a.id,a.title,b.username,a.created,a.commentCnt FROM cms_article a 
+  		LEFT JOIN cms_user b ON a.user_id = b.id  where	1=1
+  			<if test="dt1!=null and dt1!='' ">
+  				AND a.created &gt;= #{dt1}
+  			</if>
+  			<if test="dt2!=null and dt2!='' ">
+  				AND a.created &lt;= #{dt2}
+  			</if>
+  			
+	  		<if test="tj!=null and tj!='' ">
+	  			ORDER BY ${tj} DESC
+	  		</if>
+  	</select>
+  </mapper>
